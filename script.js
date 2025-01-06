@@ -24,7 +24,7 @@ startButton.addEventListener('click', async () => {
 
   peerConnection.onicecandidate = async (event) => {
     if (event.candidate) {
-      const response = await fetch('/.netlify/functions/signal', {
+      const response = await fetch('/.netlify/signal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ candidate: event.candidate }),
@@ -36,7 +36,7 @@ startButton.addEventListener('click', async () => {
   const offer = await peerConnection.createOffer();
   await peerConnection.setLocalDescription(offer);
 
-  const response = await fetch('/.netlify/functions/signal', {
+  const response = await fetch('/.netlify/signal', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ offer }),
